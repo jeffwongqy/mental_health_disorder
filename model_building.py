@@ -310,7 +310,7 @@ def evaluate_models(model, X, y):
     # define cv parameters 
     cv = ShuffleSplit(train_size = 0.8, test_size = 0.2, n_splits = 5, random_state = 42)
     # define roc-auc-scoring 
-    roc_auc_scoring = make_scorer(roc_auc_score, multi_class = 'ovo', needs_proba = True)
+    roc_auc_scoring = make_scorer(roc_auc_score, multi_class = 'ovr', needs_proba = True)
     # get the CV score
     score = cross_validate(model, X, y, cv = cv, scoring = roc_auc_scoring, n_jobs = 1, return_train_score = True)
     return score    
@@ -366,7 +366,7 @@ def evaluate_models(model, X, y):
     # define cv parameters 
     cv = ShuffleSplit(train_size = 0.8, test_size = 0.2, n_splits = 5, random_state = 42)
     # define roc-auc-scoring 
-    roc_auc_scoring = make_scorer(roc_auc_score, multi_class = 'ovo', needs_proba = True)
+    roc_auc_scoring = make_scorer(roc_auc_score, multi_class = 'ovr', needs_proba = True)
     # get the CV score
     score = cross_validate(model, X, y, cv = cv, scoring = roc_auc_scoring, n_jobs = 1, return_train_score = True)
     return score    
@@ -466,16 +466,16 @@ print()
 # evaluation metrics for training set
 print("Evaluation Metrics for Training Set: ")
 print("Accuracy: {:.2f}".format(accuracy_score(y_smt, predict_y_train)))
-print("Precision: {:.2f}".format(precision_score(y_smt, predict_y_train, average = 'weighted')))
-print("F1-Score: {:.2f}".format(f1_score(y_smt, predict_y_train, average = 'weighted')))
-print("Recall: {:.2f}".format(recall_score(y_smt, predict_y_train, average = 'weighted')))
+print("Precision: {:.2f}".format(precision_score(y_smt, predict_y_train, average = 'micro')))
+print("F1-Score: {:.2f}".format(f1_score(y_smt, predict_y_train, average = 'micro')))
+print("Recall: {:.2f}".format(recall_score(y_smt, predict_y_train, average = 'micro')))
 
 # evaluation metrics for testing set
 print("Evaluation Metrics for Testing Set: ")
 print("Accuracy: {:.2f}".format(accuracy_score(y_test, predict_y_test)))
-print("Precision: {:.2f}".format(precision_score(y_test, predict_y_test, average = 'weighted')))
-print("F1-Score: {:.2f}".format(f1_score(y_test, predict_y_test, average = 'weighted')))
-print("Recall: {:.2f}".format(recall_score(y_test, predict_y_test, average = 'weighted')))
+print("Precision: {:.2f}".format(precision_score(y_test, predict_y_test, average = 'macro')))
+print("F1-Score: {:.2f}".format(f1_score(y_test, predict_y_test, average = 'macro')))
+print("Recall: {:.2f}".format(recall_score(y_test, predict_y_test, average = 'macro')))
 
 
 ################################################################################
